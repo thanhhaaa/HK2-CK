@@ -1,1 +1,67 @@
+import tkinter
+from tkinter import *
+from tkinter.ttk import *
+from tkinter import messagebox
+
+import self as self
+from PIL import ImageTk, Image
+from tkinter import ttk
+
+from PIL.Image import item
+
+from deffunc import *
+
+window = Tk()
+window.title = ""
+window.geometry("600x600")
+
+framecbb = Frame(window)
+framecbb.grid(row=0, column=0)
+mylabel = Label(framecbb, text='Chọn món ăn')
+mylabel.pack()
+
+mycbb = Combobox(framecbb)
+mycbb['values'] = ('Thịt heo', 'Thịt bò', 'Cá', 'Tôm', 'Mực','Trứng')
+mycbb.pack()
+
+# img = Image.open('THANHHAS4HANA.png')
+# resized = img.resize((350, 500), Image.ANTIALIAS)
+# nimg = ImageTk.PhotoImage(resized)
+
+# mlb = Label(window, image=nimg)
+# mlb.pack(anchor=SE)
+
+weight = Label(framecbb, text="Khối lượng thức ăn nạp vào (gam)")
+weight.pack()
+
+value = tkinter.StringVar(value=0)  #valueforweight
+ws = ttk.Spinbox(framecbb,from_= 1, to=1000, textvariable=value,wrap=True, width= 30)  #weightspin
+ws.pack(anchor=CENTER)
+
+framemt = Frame(window)
+framemt.grid(row=0, column=1, columnspan=2)
+
+mt = ttk.Treeview(framemt, columns = ("1", "2", "3"), show = 'headings')
+#formate column
+mt.column("#0",width=0)
+mt.column("1",width=150)
+mt.column("2",width=90)
+mt.column("3",width=150)
+
+#create heading
+mt.heading("#0")
+mt.heading("1",text="Món ăn")
+mt.heading("2",text="Lượng")
+mt.heading("3",text="Kcal")
+
+mt.pack(anchor=NE)
+
+mybtt1 = Button(framecbb, text='Lưu món ăn', command= getdata) #tạo tính năng lưu cho nút này
+mybtt1.pack()
+mybttn2 = Button(framemt, text="Xóa món ăn", command=delete)
+mybttn2.pack()
+
+window.mainloop()
+
+
 
