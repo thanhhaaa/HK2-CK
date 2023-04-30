@@ -1,0 +1,130 @@
+from tkinter import *
+from tkinter import ttk
+from datetime import datetime
+now = datetime.now()
+
+
+class Tab:
+    def __init__(self, window):
+        self.window = window
+        self.window.title("Ghi chú")
+        self.window.geometry('450x450')
+        self.mynotebook = ttk.Notebook(window)
+        self.mynotebook.pack(fill=BOTH)
+        self.tab()
+
+    def ghiFile(self, path, content):  # Lưu file
+        f = open(path, "a", encoding="utf-8")
+        f.write('-----' + now.strftime("%H") + ":" + now.strftime("%M") + ":" + now.strftime("%S") + " " +
+                now.strftime("%d") + "/" + now.strftime("%m") + "/" + now.strftime("%Y") + '-----' + "\n")
+        f.write(content + "\n" + "\n")
+        f.close()
+
+    path = "run.txt"
+
+    def alarm(self):
+        toplevel = Toplevel()
+        toplevel.title('')
+        toplevel.geometry('165x85')
+        # toplevel.iconbitmap("clock.icon.png")
+
+        frame = Frame(toplevel, borderwidth=1)
+        frame.pack(fill=BOTH, expand=True)
+
+        lb = Label(frame, text="Nhập thời gian báo nhắc nhở")
+        lb.pack(side=TOP)
+
+        hour = Entry(frame, width=5)
+        hour.place(x=20, y=30)
+        lb1 = Label(frame, text=':')
+        lb1.place(x=55, y=30)
+        min = Entry(frame, width=5)
+        min.place(x=65, y=30)
+        lb2 = Label(frame, text=':')
+        lb2.place(x=100, y=30)
+        sec = Entry(frame, width=5)
+        sec.place(x=110, y=30)
+
+        def check():
+            flag = False
+            while not flag:
+                now = datetime.now()
+                current_hour = now.strftime("%H")
+                current_minute = now.strftime("%M")
+                current_second = now.strftime("%S")
+                if int(current_hour) == int(hour.get()) and int(current_minute) == int(min.get()) and int(
+                        current_second) == int(sec.get()):
+                    open_window()
+                    flag = True
+                else:
+                    flag = False
+
+        def clear():
+            hour.delete(0, END)
+            min.delete(0, END)
+            sec.delete(0, END)
+
+        button = Button(toplevel, text="Hẹn giờ", relief=GROOVE, command=check)
+        button.pack(side=RIGHT)
+        button1 = Button(toplevel, text="Xóa", relief=GROOVE, command=clear)
+        button1.pack(side=RIGHT)
+
+    def tab(self):
+        def save():
+            inputValue = textbox.get("1.0", "end-1c")  # Lấy giá trị từ textbox
+            self.ghiFile("run.txt", inputValue)
+
+        myframe = ttk.Frame(self.mynotebook)
+        myframe.pack(fill=BOTH)
+        self.mynotebook.add(myframe, text="New tab")
+        textbox = Text(myframe)
+        textbox.pack(fill=BOTH)
+        but1 = Button(myframe, text="Save", command=save)
+        but1.pack(side=RIGHT)
+        but2 = Button(myframe, text='New', command=lambda: self.tab())
+        but2.pack(side=RIGHT)
+        but3 = Button(myframe, text='Quit', command=myframe.destroy)
+        but3.pack(side=RIGHT)
+        but4 = Button(myframe, text='Alarm', command=self.alarm)
+        but4.pack(side=RIGHT)
+
+
+def open_window():
+    toplevel = Toplevel()
+    toplevel.title('')
+    toplevel.geometry('140x70')
+
+    frame = Frame(toplevel, borderwidth=1)
+    frame.pack(fill=BOTH, expand=True)
+
+    lb = Label(frame, text='Tới lúc uống nước rồi!')
+    lb.pack(expand=True)
+
+    but1 = Button(toplevel, text='OK', command=toplevel.destroy)
+    but1.pack(side=RIGHT)
+    but1 = Button(toplevel, text='Nhắc lại sau 5 phút', command=nhac)
+    but1.pack(side=RIGHT)
+    toplevel.mainloop()
+
+
+def nhac():
+    from datetime import datetime
+    now = datetime.now()
+
+    current_minute = now.strftime("%M")
+
+    pbl = int(current_minute) + 0
+    print('báo lại sau 5 phút')
+    flag = False
+    while flag == False:
+        from datetime import datetime
+        now = datetime.now()
+        current_minute = now.strftime("%M")
+
+        if int(current_minute) == pbl:
+            open_window()
+            flag = True
+
+window = Tk()
+Tab(window)
+mainloop()
