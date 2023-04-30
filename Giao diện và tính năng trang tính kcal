@@ -20,14 +20,8 @@ framecbb.grid(row=0, column=0)
 mylabel = Label(framecbb, text='Select food')
 mylabel.pack()
 
-
-
-# img = Image.open('THANHHAS4HANA.png')
-# resized = img.resize((350, 500), Image.ANTIALIAS)
-# nimg = ImageTk.PhotoImage(resized)
-
-# mlb = Label(window, image=nimg)
-# mlb.pack(anchor=SE)
+mytext = Text(framecbb,width=28,height=-5, font=("Ariel",10))
+mytext.pack()
 
 weight = Label(framecbb, text="Khối lượng thức ăn nạp vào (gam)")
 weight.pack()
