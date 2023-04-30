@@ -17,12 +17,10 @@ window.geometry("600x600")
 
 framecbb = Frame(window)
 framecbb.grid(row=0, column=0)
-mylabel = Label(framecbb, text='Chọn món ăn')
+mylabel = Label(framecbb, text='Select food')
 mylabel.pack()
 
-mycbb = Combobox(framecbb)
-mycbb['values'] = ('Thịt heo', 'Thịt bò', 'Cá', 'Tôm', 'Mực','Trứng')
-mycbb.pack()
+
 
 # img = Image.open('THANHHAS4HANA.png')
 # resized = img.resize((350, 500), Image.ANTIALIAS)
