@@ -56,6 +56,18 @@ mt.heading("3",text="Kcal")
 
 mt.pack(anchor=NE)
 
+#add data
+list = []
+def getdata():
+    string = mycbb.get() + " " + ws.get()
+    list.append(string)
+    mt.insert(parent='', index=END, values=list[len(list)-1])
+
+def delete():
+    select_item = mt.selection()[0]
+    mt.delete(select_item)
+
+
 mybtt1 = Button(framecbb, text='Lưu món ăn', command= getdata) #tạo tính năng lưu cho nút này
 mybtt1.pack()
 mybttn2 = Button(framemt, text="Xóa món ăn", command=delete)
