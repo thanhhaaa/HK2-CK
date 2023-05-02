@@ -10,6 +10,8 @@ class TDEE_Class:
         self.window.geometry("650x680+320+50")
         self.window.config(bg="#E0FFFF")
         self.window.resizable(width=False, height=False)
+        self.window.title = Label(self.window, text="Calories per day",font =("courier bold",25),bg="#E0FFFF").pack(side=TOP,fill=X)
+
         
 
         self.var_height=StringVar()
@@ -48,8 +50,8 @@ class TDEE_Class:
         Cmb = ttk.Combobox(self.window,values=workout,textvariable=self.var_workout, font="Times 15").place(x=250,y=380,width=300,height=40)
 
 
-        btn_TDEE=Button(self.window,text=" Calculate TDEE",bg="#DCF8C6",command=self.TDEE,font=("courier",15))
-        btn_TDEE.place(x=250,y=430,width=130,height=50)
+        btn_TDEE=Button(self.window,text=" Calculate TDEE",bg="#DCF8C6",command=self.TDEE,font=("Times",14))
+        btn_TDEE.place(x=250,y=430,width=160,height=50)
         btn_clear=Button(self.window,text="Clear",bg="#BBBBBB",command=self.clear,font=("Times",15))
         btn_clear.place(x=420,y=430,width=130,height=50)
 
