@@ -4,10 +4,24 @@ from tkinter.ttk import *
 
 window = Tk()
 window.title = ("")
-window.geometry = ("600x600")
+window.geometry("600x300")
 
 mynotebook = ttk.Notebook(window)
-mynotebook.pack()
+mynotebook.pack(fill=BOTH)
+
+
+def tab():
+    myframe = ttk.Frame(mynotebook)
+    myframe.pack(fill=BOTH)
+    mynotebook.add(myframe, text="Trang chủ")
+    mylabel = Label(myframe, text='Choose feature:')
+    mylabel.pack(fill=BOTH, expand=1)
+    bttn1 = Button(myframe, text="Kcal Calculator", command=tab1, width=15)
+    bttn1.pack(side=LEFT)
+    bttn2 = Button(myframe, text="TDEE Calculator", command=tab2, width=15)
+    bttn2.pack(side=LEFT)
+    bttn3 = Button(myframe, text="Note", command=tab3, width=15)
+    bttn3.pack(side=LEFT)
 
 def tab1():
     myframe = ttk.Frame(mynotebook)
@@ -23,8 +37,15 @@ def tab2():
     but1 = Button(myframe, text='Quit', command=myframe.destroy)
     but1.pack(side=RIGHT)
 
-bttn1 = Button(window, text="Kcal Calculator", command=tab1)
-bttn1.pack()
-bttn2 = Button(window, text="TDEE Calculator", command=tab2)
-bttn2.pack()
+def tab3():
+    myframe = ttk.Frame(mynotebook)
+    myframe.pack()
+    mynotebook.add(myframe, text="Note")
+    but1 = Button(myframe, text='Quit', command=myframe.destroy)
+    but1.pack(side=RIGHT)
+
+
+
+abu = Text()
+tab()
 window.mainloop()
