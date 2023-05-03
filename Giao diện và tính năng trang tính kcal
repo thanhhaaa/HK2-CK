@@ -1,15 +1,9 @@
 import tkinter
 from tkinter import *
 from tkinter.ttk import *
-from tkinter import messagebox
-
-import self as self
-from PIL import ImageTk, Image
+from openpyxl import load_workbook
+import openpyxl
 from tkinter import ttk
-
-from PIL.Image import item
-
-from deffunc import *
 
 window = Tk()
 window.title = ""
@@ -50,22 +44,60 @@ mt.pack(anchor=NE)
 
 #add data
 list = []
-def getdata():
-    string = mycbb.get() + " " + ws.get()
-    list.append(string)
-    mt.insert(parent='', index=END, values=list[len(list)-1])
 
 def delete():
     select_item = mt.selection()[0]
     mt.delete(select_item)
 
+path = "C:\\Users\\PC\\Downloads\\calo.xlsx"
+wb_obj = openpyxl.load_workbook(path)
+
+
+sheet_obj = wb_obj.active
+m_row = sheet_obj.max_row
+
+listfood=[]
+listkcal=[]
+
+for i in range(1, m_row + 1):
+    cell1_obj = sheet_obj.cell(row=i, column=1)
+    listfood.append(cell1_obj.value)
+
+print(listfood)
+for i in range(1, m_row + 1):
+    cell2_obj = sheet_obj.cell(row=i, column=2)
+    listkcal.append(cell2_obj.value)
+print(listkcal)
+
+a = float(ws.get()) * float(listkcal[2])
+print(a)
+def cal():
+    for i in range(len(listfood)):
+        print(listfood[i])
+        print(ws.get())
+        print(listkcal[i])
+        if mytext.get("1.0","end-1c") == listfood[i]:
+            a = float(ws.get()) * float(listkcal[i])
+            print(a)
+        # else:
+        #     print("hehe")
+        #     return a
+print(type(ws.get()))
+print(mytext.get("1.0","end-1c"))
+a = cal()
+print(a)
+def getdata():
+    string = mytext.get("1.0","end-1c") + " " + ws.get() + " " + str(a)
+    list.append(string)
+    mt.insert(parent='', index=END, values=list[len(list)-1])
+
+# def kcalcal (tinh calo)
 
 mybtt1 = Button(framecbb, text='Lưu món ăn', command= getdata) #tạo tính năng lưu cho nút này
 mybtt1.pack()
 mybttn2 = Button(framemt, text="Xóa món ăn", command=delete)
 mybttn2.pack()
+mybttn3 = Button(framemt, text="Tính", command=cal)
+mybttn3.pack()
 
 window.mainloop()
-
-
-
