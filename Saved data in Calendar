@@ -1,0 +1,45 @@
+from datetime import datetime
+from tkinter import *
+from tkinter import messagebox
+import openpyxl
+from tkcalendar import *
+
+window = Tk()
+cal = Calendar(window, selectmode='day', date_pattern='y-mm-dd')
+cal.pack(fill=X)
+
+path = "C:/Users/MyPC/Downloads/kcal.xlsx"
+wb_obj = openpyxl.load_workbook(path)
+
+sheet_obj = wb_obj.active
+m_row = sheet_obj.max_row
+
+list_kcal = []
+
+for i in range(2, m_row + 1):
+    cell1_obj = sheet_obj.cell(row=i, column=3)
+    list_kcal.append(cell1_obj.value)
+
+
+def get_date():
+    listdate = []
+
+    for i in range(2, m_row + 1):
+        cell1_obj = sheet_obj.cell(row=i, column=1)
+        listdate.append(str(datetime.date(cell1_obj.value)))
+
+    i = 0
+    if cal.get_date() not in listdate:
+        messagebox.showinfo("Bye", "Không có dữ liệu")
+    else:
+        while i < (len(listdate) + 1):
+            if cal.get_date() == listdate[i]:
+                messagebox.showinfo("Hello", f"Tổng kcal: {list_kcal[i]}")
+                break
+            else:
+                i += 1
+
+
+btn = Button(window, text="Click", command=get_date)
+btn.pack(side=BOTTOM)
+mainloop()
