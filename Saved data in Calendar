@@ -5,7 +5,7 @@ import openpyxl
 from tkcalendar import *
 
 window = Tk()
-cal = Calendar(window, selectmode='day', date_pattern='y-mm-dd')
+cal = Calendar(window, selectmode='day', date_pattern='y-mm-dd', showweeknumbers= False, showothermonthdays = False)
 cal.pack(fill=X)
 
 path = "C:/Users/MyPC/Downloads/kcal.xlsx"
