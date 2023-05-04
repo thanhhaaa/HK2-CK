@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter.ttk import *
 
 window = Tk()
-window.title("QUẢN LÝ LƯỢNG CALOROIES THU NẠP MỖI NGÀY")
+window.title("MANAGE DAILY CALORIE INTAKE ")
 window.geometry("600x300")
 
 mynotebook = ttk.Notebook(window)
