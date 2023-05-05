@@ -32,12 +32,14 @@ def tab1():
     mynotebook.add(myframe, text="Kcal Calculator")
     but1 = Button(myframe, text='Quit', command=myframe.destroy)
     but1.pack(side=RIGHT)
+    mynotebook.select(myframe)
 
 
 def tab2():
     myframe = ttk.Frame(mynotebook)
     myframe.place(x=50, y=30)
     mynotebook.add(myframe, text="TDEE Calculator")
+    mynotebook.select(myframe)
 
     class TDEE_Class:
         def __init__(self, myframe, mynotebook):
@@ -158,6 +160,7 @@ def tab3():
     myframe = ttk.Frame(mynotebook)
     myframe.pack()
     mynotebook.add(myframe, text="Note")
+    mynotebook.select(myframe)
 
     class Tab:
         def __init__(self, myframe, mynotebook):
