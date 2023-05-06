@@ -11,13 +11,13 @@ window.geometry("600x600")
 
 framecbb = Frame(window)
 framecbb.grid(row=0, column=0)
-mylabel = Label(framecbb, text='Select food')
+mylabel = Label(framecbb, text='ENTER FOOD')
 mylabel.pack()
 
 mytext = Text(framecbb,width=28,height=-5, font=("Ariel",10))
 mytext.pack()
 
-weight = Label(framecbb, text="Khối lượng thức ăn nạp vào (gam)")
+weight = Label(framecbb, text="FOOD INTAKE (gam)")
 weight.pack()
 
 value = tkinter.StringVar(value=0)  #valueforweight
@@ -49,7 +49,8 @@ def delete():
     select_item = mt.selection()[0]
     mt.delete(select_item)
 
-path = "C:\\Users\\PC\\Downloads\\calo.xlsx"
+
+path = "C:\\Users\\data\\Downloads\\calo.xlsx"
 wb_obj = openpyxl.load_workbook(path)
 
 
@@ -69,35 +70,28 @@ for i in range(1, m_row + 1):
     listkcal.append(cell2_obj.value)
 print(listkcal)
 
-a = float(ws.get()) * float(listkcal[2])
-print(a)
+
 def cal():
     for i in range(len(listfood)):
-        print(listfood[i])
-        print(ws.get())
-        print(listkcal[i])
         if mytext.get("1.0","end-1c") == listfood[i]:
-            a = float(ws.get()) * float(listkcal[i])
-            print(a)
-        # else:
-        #     print("hehe")
-        #     return a
-print(type(ws.get()))
+            a = float(ws.get()) * float(listkcal[i])     #ws là khối lượng thực phẩm tiêu thụ
+            print("2",a) #đã tính đươc kcal theo khoi luong
+            return a
+
 print(mytext.get("1.0","end-1c"))
-a = cal()
-print(a)
+
 def getdata():
-    string = mytext.get("1.0","end-1c") + " " + ws.get() + " " + str(a)
+    string = mytext.get("1.0","end-1c") + " " + ws.get() + " " + str(cal())
     list.append(string)
     mt.insert(parent='', index=END, values=list[len(list)-1])
 
 # def kcalcal (tinh calo)
 
-mybtt1 = Button(framecbb, text='Lưu món ăn', command= getdata) #tạo tính năng lưu cho nút này
+mybtt1 = Button(framecbb, text='Save', command= getdata) #tạo tính năng lưu cho nút này
 mybtt1.pack()
-mybttn2 = Button(framemt, text="Xóa món ăn", command=delete)
+mybttn2 = Button(framemt, text="Delete", command=delete)
 mybttn2.pack()
-mybttn3 = Button(framemt, text="Tính", command=cal)
+mybttn3 = Button(framemt, text="Calculate", command=cal)
 mybttn3.pack()
 
 window.mainloop()
